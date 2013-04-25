@@ -25,6 +25,8 @@ informe:
 
 * **clean**: Elimina todos los archivos generados.
 
+* **createdb**: Crea la base de datos en funcion al script de creacion.
+
 Para poder correr estas tareas se requiere instalar las siguientes dependencias
 en el sistema:
 

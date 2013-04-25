@@ -23,3 +23,6 @@ doc-preview: doc
 
 doc-spell:
 	aspell -t check informe.tex -d es
+
+createdb:
+	psql -U postgres -a -f scripts/hiposoft_create.sql
