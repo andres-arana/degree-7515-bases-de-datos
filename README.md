@@ -6,11 +6,10 @@ datos para la carrera de Ingeniería en Informática de la FIUBA.
 ## Desarrollo
 
 El informe del trabajo práctico fue confeccionado usando latex y se encuentra
-en la raiz del repositorio, en el archivo `informe.tex`. Los diagramas,
-implementados con DIA, se encuentran en `diagramas/*.dia`. Los scripts
-asociados a la creación y consulta del esquema desarrollado se encuentan en la
-carpeta `scripts`. El enunciado original del trabajo práctico está en la raíz
-del repositorio, en `enunciado.pdf`
+en el archivo `docs/informe.tex`. Los diagramas, implementados con DIA, se
+encuentran en `docs/diagramas/*.dia`. Los scripts asociados a la creación y
+consulta del esquema desarrollado se encuentan en la carpeta `scripts`. El
+enunciado original del trabajo práctico está en `docs/enunciado.pdf`
 
 Se incluye además un makefile con varias tareas para facilitar el armado del
 informe:
