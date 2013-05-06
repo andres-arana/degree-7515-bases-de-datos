@@ -24,5 +24,17 @@ doc-preview: doc
 doc-spell:
 	aspell -t check informe.tex -d es
 
-createdb:
-	psql -U postgres -a -f scripts/hiposoft_create.sql
+db-up:
+	vagrant up
+
+db-stop:
+	vagrant halt
+
+db-destroy:
+	vagrant destroy
+
+db-console:
+	psql -h localhost -U postgres --password
+
+db-create:
+	psql -h localhost -U postgres --password -a -f sql/create.sql

@@ -55,16 +55,17 @@ ella. Si bien es posible utilizar los comandos de vagrant estándar para manejar
 la máquina virtual, se proveen varias tareas en el makefile que lo hacen más
 sencillo:
 
-* **vagrant-up**: Descarga, configura y levanta una máquina virtual con un
-  server de PostgreSQL listo para ejecutar los scripts del trabajo práctico. Si
-la máquina virtual ya fue descargada y configurada anteriormente, únicamente la
-levanta.
+* **db-up**: Inicia un servidor PostgreSQL virtualizado, descargando y
+  configurando una máquina virtual virtualbox si fuese necesario. El servidor
+puede accederse conectándose a localhost, puerto 5432 con credenciales
+postgres:password.
 
-* **vagrant-ssh**: Abre una sesión de ssh a la máquina virtual.
+* **db-stop**: Detiene el servidor PostgreSQL virtualizado. Con `db-up` se
+  vuelve a iniciar.
 
-* **vagrant-halt**: Cierra la máquina virtual.
+* **db-destroy**: Elimina la máquina virtualizada.
 
-* **vagrant-destroy**: Elimina completamente la máquina virtual previamente
-  creada. La próxima vez que se ejecute `vagrant-up` se deberá descargar y
-configurar nuevamente la virtual machine.
+* **db-console**: Se conecta a la consola de la base de datos PostgreSQL
+  virtualizada a través de `psql`.
+
 
