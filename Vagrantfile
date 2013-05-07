@@ -20,7 +20,7 @@ Vagrant::Config.run do |config|
         ],
         :users => [{ 
           :username => "postgres", 
-          :password => "password",
+          :password => "123",
           :superuser => true, 
           :login => true, 
           :createdb => true 

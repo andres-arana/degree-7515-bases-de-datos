@@ -144,8 +144,7 @@ subconjunto de instrucciones DDL del lenguaje.
 \subsection{Hipótesis}
 
 En la confección del diagrama se tomaron como verdaderas las siguientes
-hipótesis, confirmadas en la investigación realizada sobre el dominio en
-publicaciones hípicas diversas:
+hipótesis:
 
 \begin{enumerate}
 
@@ -159,16 +158,21 @@ publicaciones hípicas diversas:
     que en posteriores carreras deba seguir participando con el mismo jockey.
     Cada jockey puede participar en diferentes carreras con diferentes equinos.
 
-  \item Tanto cuidadores y entrenadores como jockeys no pertenecen a ningún
-    stud en particular. El stud únicamente posee los equinos que le
-    corresponden. Nada impide que un jockey participe en diferentes carreras
-    con equinos de diferentes studs. Lo mismo es cierto para cuidadores y
-    entrenadores, que pueden trabajar con equinos de distintos studs.
+  \item Entrenadores, cuidadores y jockeys trabajan para un stud particular, no
+    pudiendo realizar sus tareas correspondientes en equinos de otros studs.
 
   \item Cada encuentro programado se realiza en su totalidad a lo largo de un
     único día.
 
 \end{enumerate}
+
+Todas estas hipótesis fueron confirmadas consultando a expertos y publicaciones
+sobre el dominio del problema. Particularmente, en lo relacionado a la relación
+entre los entrenadores, cuidadores y jockeys con los studs, se corroboró que en
+el ámbito hípico estos trabajan para una y sólo una caballeriza. Siendo el
+enunciado específico en definir stud como tanto el lugar donde reposan los
+caballos como la caballeriza, esto indica que entonces el personal está
+relacionado con los studs de la forma indicada.
 
 \subsection{Diagrama de entidad-interrelación}
 
@@ -178,7 +182,7 @@ detalla en el enunciado.
 
 \begin{figure}[h!t]
   \centering
-  \includegraphics[width=1.50\textwidth, angle=90]{build/images/der.png}
+\includegraphics[width=1.3\textwidth, angle=90]{build/images/der.png}
   \caption{Diagrama de entidad-interrelación} \label{fig:der}
 \end{figure}
 
@@ -187,7 +191,7 @@ detalla en el enunciado.
 \subsection{Restricciones adicionales}
 
 Las siguientes restricciones adicionales se detallan a continuación por
-pertenecer al modelado de entidad-interrelación. No están representadas en el
+pertenecer al modelo de entidad-interrelación. No están representadas en el
 diagrama dado que su inclusión agregaba complejidad adicional sobre en la
 figura que consideramos innecesaria.
 
@@ -215,7 +219,7 @@ detallado en la sección \ref{sec:der}.
 
 \begin{figure}[h!t]
   \centering
-  \includegraphics[width=1.55\textwidth, angle=90]{build/images/rel.png}
+  \includegraphics[width=1.4\textwidth, angle=90]{build/images/rel.png}
   \caption{Modelo relacional} \label{fig:relacional}
 \end{figure}
 
@@ -225,7 +229,9 @@ detallado en la sección \ref{sec:der}.
 
 A continuación se incluyen los scripts de creación de las tablas del modelo
 relacional para ser ejecutado en un sistema de bases de datos que interprete
-SQL, particularmente las instrucciones DDL de dicho lenguaje.
+SQL, particularmente las instrucciones DDL de dicho lenguaje. No se incluyen
+las instrucciones, normalmente específicas al motor propiamente dicho, de
+creación de usuarios, roles, schemas y bases de datos correspondientes.
 
 \lstinputlisting{sql/schema.sql}
 

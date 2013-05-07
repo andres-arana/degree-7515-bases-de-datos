@@ -24,17 +24,18 @@ doc-preview: doc
 doc-spell:
 	aspell -t check informe.tex -d es
 
-db-up:
+vm-up:
 	vagrant up
 
-db-stop:
+vm-stop:
 	vagrant halt
 
-db-destroy:
+vm-destroy:
 	vagrant destroy
 
 db-console:
 	psql -h localhost -U postgres --password
 
-db-create:
-	psql -h localhost -U postgres --password -a -f sql/create.sql
+db-reset:
+	psql -h localhost -U postgres --password -a -f sql/database.sql -v client_min_messages='warning'
+	psql -h localhost -U postgres -d hiposoft --password -a -f sql/schema.sql -v client_min_messages='warning'
