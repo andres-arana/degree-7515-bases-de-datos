@@ -33,6 +33,10 @@
 % Formato de párrafo
 \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 
+% Subrayado de palabras
+\usepackage[normalem]{ulem}
+
+
 % Formato de listados de código
 \lstset{
   basicstyle=\footnotesize\ttfamily,
@@ -207,7 +211,28 @@ figura que consideramos innecesaria.
 
 \section{Diccionario de datos}
 
-[TODO: Definir el formato]
+HIPÓDROMO(\uline{Nombre}, Dirección)
+
+ENCUENTRO(\uline{Número, Fecha}, HipódromoNombre)
+
+PISTA(\uline{Nombre, HipodromoNombre}, Tipo, NumeroAndariveles)
+
+CARRERA(\uline{Número, EncuentroNumero}, Tipo, EstadoPista, EstadoTiempo, SexoEquinos, Distancia, PistaNombre, PistaHipódromoNombre)
+
+EQUINO(\uline{Nombre}, Tipo, Pelaje, Sexo, Handicap, StudNombre, PadreNombre, MadreNombre, CuidadorPersonaDNI, EntrenadorPersonaDNI)
+
+PARTICIPACIÓN(\uline{JockeyPersonaDNI, EquinoNombre, CarreraNúmero, CarreraEncuentroNúmero}, Tiempo, Andarivel, PesoJockey, TallaJockey, HandicapEquino)
+
+CUIDADOR(\uline{PersonaDNI})
+
+ENTRENADOR(\uline{PersonaDNI})
+
+PERSONA(\uline{DNI}, Nombres, Apellidos, StudNombre)
+
+JOCKEY(\uline{PersonaDNI}, Categoría, Peso, Talla)
+
+STUD(\uline{Nombre}, ColorGorra, ColorChaqueta)
+
 
 \section{Modelo relacional}
 
