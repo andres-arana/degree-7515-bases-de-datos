@@ -22,7 +22,7 @@ doc-preview: doc
 	./scripts/preview build/informe.pdf &
 
 doc-spell:
-	aspell -t check informe.tex -d es
+	aspell -t check docs/informe.tex -d es
 
 vm-up:
 	vagrant up
