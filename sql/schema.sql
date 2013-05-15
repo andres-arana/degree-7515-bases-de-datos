@@ -6,8 +6,9 @@ CREATE TABLE carrera (
     estado_pista varchar,
     estado_tiempo varchar,
     sexo_equinos integer NOT NULL,
-    distancia integer,
-    pista_nombre varchar,
+    distancia integer NOT NULL,
+    hora time NOT NULL, 
+    pista_nombre varchar NOT NULL,
     pista_hipodromo_nombre varchar NOT NULL
 );
 
@@ -32,8 +33,8 @@ CREATE TABLE equino (
     sexo integer NOT NULL,
     handicap decimal NOT NULL,
     stud_nombre varchar NOT NULL,
-    padre_nombre varchar NOT NULL,
-    madre_nombre varchar NOT NULL,
+    padre_nombre varchar,
+    madre_nombre varchar,
     cuidador_persona_dni integer NOT NULL,
     entrenador_persona_dni integer NOT NULL
 );
@@ -55,11 +56,13 @@ CREATE TABLE participacion (
     equino_nombre varchar NOT NULL,
     carrera_numero integer NOT NULL,
     carrera_encuentro_numero integer NOT NULL,
+    stud_nombre varchar NOT NULL,
     tiempo integer,
     andarivel integer,
     peso_jockey decimal,
     talla_jockey decimal,
-    handicap_equino decimal
+    handicap_equino decimal,
+    descalificado boolean NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE persona (
@@ -72,8 +75,8 @@ CREATE TABLE persona (
 CREATE TABLE pista (
     nombre varchar NOT NULL,
     hipodromo_nombre varchar NOT NULL,
-    tipo varchar,
-    nro_andariveles integer
+    tipo varchar NOT NULL,
+    nro_andariveles integer NOT NULL
 );
 
 CREATE TABLE stud (
@@ -202,6 +205,16 @@ ALTER TABLE participacion
     ADD CONSTRAINT fk_participacion_jockey
     FOREIGN KEY (jockey_persona_dni)
     REFERENCES jockey(persona_dni);
+
+ALTER TABLE participacion
+    ADD CONSTRAINT fk_participacion_stud
+    FOREIGN KEY (stud_nombre)
+    REFERENCES stud(nombre);
+
+ALTER TABLE persona
+    ADD CONSTRAINT fk_persona_stud
+    FOREIGN KEY (stud_nombre)
+    REFERENCES stud(nombre);
 
 ALTER TABLE pista
     ADD CONSTRAINT fk_pista_hipodromo
