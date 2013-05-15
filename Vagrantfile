@@ -4,7 +4,7 @@
 Vagrant::Config.run do |config|
   config.vm.box = "ubuntu-quantal-i386"
   config.vm.box_url = "http://cloud-images.ubuntu.com/quantal/current/quantal-server-cloudimg-vagrant-i386-disk1.box"
-  config.vm.forward_port 5432, 5432
+  config.vm.forward_port 5432, 3000
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "vagrant/cookbooks"

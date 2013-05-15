@@ -186,7 +186,7 @@ detalla en el enunciado.
 
 \begin{figure}[h!t]
   \centering
-\includegraphics[width=1.3\textwidth, angle=90]{build/images/der.png}
+\includegraphics[width=1.5\textwidth, angle=90]{build/images/der.png}
   \caption{Diagrama de entidad-interrelación} \label{fig:der}
 \end{figure}
 
@@ -211,28 +211,31 @@ figura que consideramos innecesaria.
 
 \section{Diccionario de datos}
 
-HIPÓDROMO(\uline{Nombre}, Dirección)
+\begin{itemize}
 
-ENCUENTRO(\uline{Número, Fecha}, HipódromoNombre)
+  \item HIPÓDROMO(\uline{Nombre}, Dirección)
 
-PISTA(\uline{Nombre, HipodromoNombre}, Tipo, NumeroAndariveles)
+  \item ENCUENTRO(\uline{Número, Fecha}, HipódromoNombre)
 
-CARRERA(\uline{Número, EncuentroNumero}, Tipo, EstadoPista, EstadoTiempo, SexoEquinos, Distancia, Hora, PistaNombre, PistaHipódromoNombre)
+  \item PISTA(\uline{Nombre, HipodromoNombre}, Tipo, NumeroAndariveles)
 
-EQUINO(\uline{Nombre}, Tipo, Pelaje, Sexo, Handicap, StudNombre, PadreNombre, MadreNombre, CuidadorPersonaDNI, EntrenadorPersonaDNI)
+  \item CARRERA(\uline{Número, EncuentroNumero}, Tipo, EstadoPista, EstadoTiempo, SexoEquinos, Distancia, Hora, PistaNombre, PistaHipódromoNombre)
 
-PARTICIPACIÓN(\uline{JockeyPersonaDNI, EquinoNombre, CarreraNúmero, CarreraEncuentroNúmero}, StudNombre, Tiempo, Andarivel, PesoJockey, TallaJockey, HandicapEquino, Descalificado)
+  \item EQUINO(\uline{Nombre}, Tipo, Pelaje, Sexo, Handicap, StudNombre, PadreNombre, MadreNombre, CuidadorPersonaDNI, EntrenadorPersonaDNI)
 
-CUIDADOR(\uline{PersonaDNI})
+  \item PARTICIPACIÓN(\uline{JockeyPersonaDNI, EquinoNombre, CarreraNúmero, CarreraEncuentroNúmero}, StudNombre, Tiempo, Andarivel, PesoJockey, TallaJockey, HandicapEquino, Descalificado)
 
-ENTRENADOR(\uline{PersonaDNI})
+  \item CUIDADOR(\uline{PersonaDNI})
 
-PERSONA(\uline{DNI}, Nombres, Apellidos, StudNombre)
+  \item ENTRENADOR(\uline{PersonaDNI})
 
-JOCKEY(\uline{PersonaDNI}, Categoría, Peso, Talla)
+  \item PERSONA(\uline{DNI}, Nombres, Apellidos, StudNombre)
 
-STUD(\uline{Nombre}, ColorGorra, ColorChaqueta)
+  \item JOCKEY(\uline{PersonaDNI}, Categoría, Peso, Talla)
 
+  \item STUD(\uline{Nombre}, ColorGorra, ColorChaqueta)
+
+\end{itemize}
 
 \section{Modelo relacional}
 
@@ -244,7 +247,7 @@ detallado en la sección \ref{sec:der}.
 
 \begin{figure}[h!t]
   \centering
-  \includegraphics[width=1.4\textwidth, angle=90]{build/images/rel.png}
+  \includegraphics[width=1.65\textwidth, angle=90]{build/images/rel.png}
   \caption{Modelo relacional} \label{fig:relacional}
 \end{figure}
 

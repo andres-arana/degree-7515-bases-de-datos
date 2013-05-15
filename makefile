@@ -34,8 +34,8 @@ vm-destroy:
 	vagrant destroy
 
 db-console:
-	psql -h localhost -U postgres --password
+	psql -h localhost -U postgres --password -p 3000
 
 db-reset:
-	psql -h localhost -U postgres --password -a -f sql/database.sql -v client_min_messages='warning'
-	psql -h localhost -U postgres -d hiposoft --password -a -f sql/schema.sql -v client_min_messages='warning'
+	psql -h localhost -U postgres -p 3000 --password -a -f sql/database.sql -v client_min_messages='warning'
+	psql -h localhost -U postgres -p 3000 -d hiposoft --password -a -f sql/schema.sql -v client_min_messages='warning'
