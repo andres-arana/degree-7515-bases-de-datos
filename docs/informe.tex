@@ -36,7 +36,6 @@
 % Subrayado de palabras
 \usepackage[normalem]{ulem}
 
-
 % Formato de listados de código
 \lstset{
   basicstyle=\footnotesize\ttfamily,
@@ -73,7 +72,7 @@
   Diego Martín Costa,      \textit{P. 78.189}                      \\
   Javier Daniel Zaniratto, \textit{P. 90.886}                      \\
   Sergio Matías Piano,     \textit{P. 85.191}                      \\
-                                                                   \\
+  \\
   \normalsize{1er. Cuatrimestre de 2013}                           \\
   \normalsize{75.15 - Bases de datos}                              \\
   \normalsize{Facultad de Ingeniería, Universidad de Buenos Aires}
@@ -186,7 +185,7 @@ detalla en el enunciado.
 
 \begin{figure}[h!t]
   \centering
-\includegraphics[width=1.5\textwidth, angle=90]{build/images/der.png}
+  \includegraphics[width=1.5\textwidth, angle=90]{build/images/der.png}
   \caption{Diagrama de entidad-interrelación} \label{fig:der}
 \end{figure}
 
@@ -211,15 +210,103 @@ figura que consideramos innecesaria.
 
 \section{Diccionario de datos}
 
+\subsection{Hipódromo}
+
+Representa una sociedad fundada para contribuir al desarrollo de la crianza de
+equinos, que dispone de pistas utilizadas en encuentros programados en los
+cuales se disputan las carreras de caballos.
+
 \begin{itemize}
 
-  \item HIPÓDROMO(\uline{Nombre}, Dirección)
+  \item \textbf{\uline{Nombre}} Nombre único descriptivo del hipódromo, como
+    puede ser "Hipódromo de San Isidro".
 
-  \item ENCUENTRO(\uline{Número, Fecha}, HipódromoNombre)
+  \item \textbf{Dirección} Dirección completa de la ubicación unívoca en donde
+    se encuentran las pistas del hipódromo.
 
-  \item PISTA(\uline{Nombre, HipodromoNombre}, Tipo, NumeroAndariveles)
+\end{itemize}
 
-  \item CARRERA(\uline{Número, EncuentroNumero}, Tipo, EstadoPista, EstadoTiempo, SexoEquinos, Distancia, Hora, PistaNombre, PistaHipódromoNombre)
+\subsection{Encuentro}
+
+Representa un conjunto de carreras equinas que se disputaron o se disputarán de
+acuerdo a la planificación anual en un único hipódromo en una fecha
+determinada.
+
+\begin{itemize}
+
+  \item \textbf{\uline{Número}} Número correlativo con el que designa al
+    encuentro.
+
+  \item \textbf{Fecha} Fecha en la que se desarrollan las carreras del
+    encuentro.
+
+  \item \textbf{HipodromoNombre} Nombre del hipódromo en el que se
+    desarrollan las carreras del encuentro.
+
+\end{itemize}
+
+\subsection{Pista}
+
+\begin{itemize}
+
+  \item \textbf{\uline{Nombre}} Nombre descriptivo de la pista con el que se
+    designa la misma.
+
+  \item \textbf{\uline{HipodromoNombre}} Nombre del hipódromo del
+    cual la pista forma parte.
+
+  \item \textbf{Tipo} Indica el materia del piso de la pista, como césped y
+    arena.
+
+  \item \textbf{NumeroAndariveles} Cantidad de andariveles disponibles en la
+    pista.
+
+\end{itemize}
+
+\subsection{Carrera}
+
+Representa una competenecia en el que diferentes equinos y jockeys participan
+intentando recorrer una distancia dada en una pista en el menor tiempo posible.
+
+\begin{itemize}
+
+  \item \textbf{\uline{Numero}} Número correlativo que identifica la carrera en
+    el encuentro.
+
+  \item \textbf{\uline{EncuentroNumero}} Número del encuentro en el que está
+    programada la carrera.
+
+  \item \textbf{\uline{HipodromoNombre}} Nombre del hipódromo del
+    cual la pista forma parte.
+
+  \item \textbf{Tipo} Clasificación de la carrera de acuerdo a las reglas bajo
+    las cuales se determina que equinos y jockeys pueden participar, como ser
+    clásicas, handicap, perdedores y de grados.
+
+  \item \textbf{EstadoPista} Indica el estado de la pista al momento de
+    disputarse la carrera.
+
+  \item \textbf{EstadoTiempo} Indica las condiciones climatológicas al momento
+    de disputarse la carrera.
+
+  \item \textbf{SexoEquinos} Sexo de los equinos que pueden participar en la
+    carrera.
+
+  \item \textbf{Distancia} Longitud pactada a recorrer para dar por completada
+    la carrera, en metros.
+
+  \item \textbf{Hora} Hora en la que está programada a comenzar la carrera.
+
+  \item \textbf{PistaNombre} Nombre de la pista en la que se disputa la
+    carrera.
+
+  \item \textbf{PistaHipodromoNombre} Nombre del hipódromo en el cual se
+    encuentra la pista en donde se disputa la carrera.
+
+\end{itemize}
+
+
+\begin{itemize}
 
   \item EQUINO(\uline{Nombre}, Tipo, Pelaje, Sexo, Handicap, StudNombre, PadreNombre, MadreNombre, CuidadorPersonaDNI, EntrenadorPersonaDNI)
 
