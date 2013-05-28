@@ -247,6 +247,8 @@ determinada.
 
 \subsection{Pista}
 
+Representa la pista de los hipódromos en donde se realizarán carreras equinas.
+
 \begin{itemize}
 
   \item \textbf{\uline{Nombre}} Nombre descriptivo de la pista con el que se
@@ -305,23 +307,132 @@ intentando recorrer una distancia dada en una pista en el menor tiempo posible.
 
 \end{itemize}
 
+\subsection{Equino}
+
+Representa a los equinos que podrán participar en los distintos encuentros representando a un stud.
 
 \begin{itemize}
 
-  \item EQUINO(\uline{Nombre}, Tipo, Pelaje, Sexo, Handicap, StudNombre, PadreNombre, MadreNombre, CuidadorPersonaDNI, EntrenadorPersonaDNI)
+  \item \textbf{\uline{Nombre}} Nombre del equino.
+    
+  \item \textbf{Tipo} 
+  
+  \item \textbf{Pelaje} Indica el color de pelaje que posee.
+  
+  \item \textbf{Sexo} Sexo del equino.
+  
+  \item \textbf{Handicap} Representa el handicap.
+   
+  \item \textbf{StudNombre} Nombre del stud al que pertenece.
+  
+  \item \textbf{PadreNombre} Nombre del padre.
+  
+  \item \textbf{MadreNombre} Nombre de la madre.
+  
+  \item \textbf{CuidadorPersonaDNI} Indica el dni de su cuidador.
+  
+  \item \textbf{EntrenadorPersonaDNI} Indica el dni de su entrenador.
+  
+\end{itemize}
 
-  \item PARTICIPACIÓN(\uline{JockeyPersonaDNI, EquinoNombre, CarreraNúmero, CarreraEncuentroNúmero}, StudNombre, Tiempo, Andarivel, PesoJockey, TallaJockey, HandicapEquino, Descalificado)
 
-  \item CUIDADOR(\uline{PersonaDNI})
 
-  \item ENTRENADOR(\uline{PersonaDNI})
 
-  \item PERSONA(\uline{DNI}, Nombres, Apellidos, StudNombre)
+\subsection{Participación}
 
-  \item JOCKEY(\uline{PersonaDNI}, Categoría, Peso, Talla)
+Representa los resultados de un jockey y un equino en las distintas carreras, guardando el tiempo que les tomó finalizarlas. 
 
-  \item STUD(\uline{Nombre}, ColorGorra, ColorChaqueta)
+\begin{itemize}
 
+  \item \textbf{\uline{JockeyPersonaDNI}} Dni del jockey que montó al equino.
+  
+  \item \textbf{\uline{EquinoNombre}} Nombre del equino que corrió la carrera.
+  
+  \item \textbf{\uline{CarreraNúmero}} Identificador de la carrera.
+  
+  \item \textbf{\uline{CarreraEncuentroNúmero}} Número del encuentro en el que se había programado la carrera.
+  
+  \item \textbf{StudNombre} Nombre del stud al que pertenece.
+  
+  \item \textbf{Tiempo} Representa el tiempo que tardó el equino en llegar a la meta.
+  
+  \item \textbf{Andarivel} Indica el andarivel en donde corrió el equino.
+  
+  \item \textbf{PesoJockey} Indica el peso del jockey en el momento de la carrera.
+  
+  \item \textbf{TallaJockey} Indica la talla del jockey cuando ocurrió la carrera.
+  
+  \item \textbf{HandicapEquino} Handicap que poseía el equino al correr la carrera.
+  
+  \item \textbf{Descalificado} Indica si el equino fue descalificado o no.
+  
+\end{itemize}
+
+
+\subsection{Cuidador}
+
+Representa a las personas encargadas del cuidado de los equinos.
+
+\begin{itemize}
+
+	\item \textbf{\uline{PersonaDNI}} Dni del cuidador.
+	
+\end{itemize}
+
+\subsection{Entrenador}
+
+Representa las personas que se encargan de entrenar a los equinos.
+
+\begin{itemize}
+
+	\item \textbf{\uline{PersonaDNI}} Dni del entrenador.
+	
+\end{itemize}
+
+\subsection{Persona}
+
+Representa a una persona.
+
+\begin{itemize}
+
+	\item \textbf{\uline{DNI}} Dni de la persona.
+	
+	\item \textbf{Nombres} Nombres de la persona.
+	
+	\item \textbf{Apellidos} Apellidos de la persona.
+	
+	\item \textbf{StudNombre} Nombre del stud para el que trabaja la persona.
+	
+\end{itemize}
+
+\subsection{Jockey}
+
+Representa a los encargados de montar los equinos en las distintas carreras de los encuentros disputados en los hipódromos representando a un stud.
+
+\begin{itemize}
+
+	\item \textbf{\uline{PersonaDNI}} Dni del jockey.
+	
+	\item \textbf{Categoría} Categoría en la cual puede competir.
+	
+	\item \textbf{Peso} Peso actual del jockey.
+	
+	\item \textbf{Talla} Talla actual del jockey.
+
+\end{itemize}
+
+\subsection{Stud}
+
+Representa las entidades dueñas de uno o varios equinos que correrán en los distintos encuentros.
+
+\begin{itemize}
+
+	\item \textbf{\uline{Nombre}} Nombre del stud.
+	
+	\item \textbf{ColorGorra} Color de la gorra que usarán los jockeys que representen al stud en una carrera.
+	
+	\item \textbf{ColorChaqueta} Color de la chaqueta que usarán los jockeys que representen al stud en una carrera.
+	
 \end{itemize}
 
 \section{Modelo relacional}
