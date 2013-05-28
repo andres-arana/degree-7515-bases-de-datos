@@ -309,29 +309,36 @@ intentando recorrer una distancia dada en una pista en el menor tiempo posible.
 
 \subsection{Equino}
 
-Representa a los equinos que podrán participar en los distintos encuentros representando a un stud.
+Representa a los equinos que podrán participar de las carreras a disputarse en
+los encuentros, representando a un stud.
 
 \begin{itemize}
 
-  \item \textbf{\uline{Nombre}} Nombre del equino.
+  \item \textbf{\uline{Nombre}} Nombre identificatorio del equino.
     
-  \item \textbf{Tipo} 
+  \item \textbf{Tipo} Indica la categoría del equino, la cual es utilizada
+	para saber en que tipo de carreras puede participar (puede ser perdedor, 
+	ganador de primera, de segunda, etc). 
   
-  \item \textbf{Pelaje} Indica el color de pelaje que posee.
+  \item \textbf{Pelaje} Indica el color de pelaje que posee el equino (rojo, 
+	negro, etc.).
   
-  \item \textbf{Sexo} Sexo del equino.
+  \item \textbf{Sexo} Indica el sexo del equino.
   
-  \item \textbf{Handicap} Representa el handicap.
+  \item \textbf{Handicap} Representa el handicap del equino que permite comparar
+	sus ventajas o desventajas respecto a otros equinos.
    
-  \item \textbf{StudNombre} Nombre del stud al que pertenece.
+  \item \textbf{StudNombre} Identificador del stud a cual pertenece el equino.
   
-  \item \textbf{PadreNombre} Nombre del padre.
+  \item \textbf{PadreNombre} Identificador del equino padre.
   
-  \item \textbf{MadreNombre} Nombre de la madre.
+  \item \textbf{MadreNombre} Identificador del equino madre.
   
-  \item \textbf{CuidadorPersonaDNI} Indica el dni de su cuidador.
+  \item \textbf{CuidadorPersonaDNI} Identificador de la persona que se encarga 
+	del cuidado del equino (cumpliendo el rol de cuidador).
   
-  \item \textbf{EntrenadorPersonaDNI} Indica el dni de su entrenador.
+  \item \textbf{EntrenadorPersonaDNI} Indentificador de la persona encargada 
+	del entrenamiento del equino.
   
 \end{itemize}
 
@@ -340,31 +347,40 @@ Representa a los equinos que podrán participar en los distintos encuentros repr
 
 \subsection{Participación}
 
-Representa los resultados de un jockey y un equino en las distintas carreras, guardando el tiempo que les tomó finalizarlas. 
+Representa la participación de un jockey y un equino en una carrera de un encuentro.
+Se utiliza para planificar la participación, y, una vez concluida la carrera,  
+guarda el tiempo que le tomó llegar a la meta, el andarivel en el que corrió,
+el Peso y la Talla del jockey al momento de la carrera, el Handicap del equino
+al momento de la carrera y si fue descalificado o no de la misma. 
 
 \begin{itemize}
 
-  \item \textbf{\uline{JockeyPersonaDNI}} Dni del jockey que montó al equino.
+  \item \textbf{\uline{JockeyPersonaDNI}} Identificador de la persona que montó
+	al equino (jockey).
   
-  \item \textbf{\uline{EquinoNombre}} Nombre del equino que corrió la carrera.
+  \item \textbf{\uline{EquinoNombre}} Identificador del equino participante.
   
   \item \textbf{\uline{CarreraNúmero}} Identificador de la carrera.
   
-  \item \textbf{\uline{CarreraEncuentroNúmero}} Número del encuentro en el que se había programado la carrera.
+  \item \textbf{\uline{CarreraEncuentroNúmero}} Identificador del encuentro
+	en el cual se había programado la carrera.
   
-  \item \textbf{StudNombre} Nombre del stud al que pertenece.
+  \item \textbf{StudNombre} Identificador del stud al cual pertenece el equino.
   
-  \item \textbf{Tiempo} Representa el tiempo que tardó el equino en llegar a la meta.
+  \item \textbf{Tiempo} Indica el tiempo que tardó el equino en recorrer la distancia
+	pactada para la carrera.
   
-  \item \textbf{Andarivel} Indica el andarivel en donde corrió el equino.
+  \item \textbf{Andarivel} Indica el andarivel de la pista en el cual
+	corrió el equino.
   
   \item \textbf{PesoJockey} Indica el peso del jockey en el momento de la carrera.
   
   \item \textbf{TallaJockey} Indica la talla del jockey cuando ocurrió la carrera.
   
-  \item \textbf{HandicapEquino} Handicap que poseía el equino al correr la carrera.
+  \item \textbf{HandicapEquino} Handicap del equino al momento de la carrera.
   
-  \item \textbf{Descalificado} Indica si el equino fue descalificado o no.
+  \item \textbf{Descalificado} Indica si el equino fue descalificado o no
+	de la carrera
   
 \end{itemize}
 
@@ -375,7 +391,7 @@ Representa a las personas encargadas del cuidado de los equinos.
 
 \begin{itemize}
 
-	\item \textbf{\uline{PersonaDNI}} Dni del cuidador.
+	\item \textbf{\uline{PersonaDNI}} DNI del cuidador.
 	
 \end{itemize}
 
@@ -385,35 +401,37 @@ Representa las personas que se encargan de entrenar a los equinos.
 
 \begin{itemize}
 
-	\item \textbf{\uline{PersonaDNI}} Dni del entrenador.
+	\item \textbf{\uline{PersonaDNI}} DNI del entrenador.
 	
 \end{itemize}
 
 \subsection{Persona}
 
-Representa a una persona.
+Representa a una persona física.
 
 \begin{itemize}
 
-	\item \textbf{\uline{DNI}} Dni de la persona.
+	\item \textbf{\uline{DNI}} DNI de la persona.
 	
 	\item \textbf{Nombres} Nombres de la persona.
 	
 	\item \textbf{Apellidos} Apellidos de la persona.
 	
-	\item \textbf{StudNombre} Nombre del stud para el que trabaja la persona.
+	\item \textbf{StudNombre} Identificador del stud para el cual trabaja la persona.
 	
 \end{itemize}
 
 \subsection{Jockey}
 
-Representa a los encargados de montar los equinos en las distintas carreras de los encuentros disputados en los hipódromos representando a un stud.
+Representa a los encargados de montar los equinos en las distintas carreras 
+de los encuentros disputados en los hipódromos, representando a un stud.
 
 \begin{itemize}
 
-	\item \textbf{\uline{PersonaDNI}} Dni del jockey.
+	\item \textbf{\uline{PersonaDNI}} DNI del jockey.
 	
-	\item \textbf{Categoría} Categoría en la cual puede competir.
+	\item \textbf{Categoría} Categoría del Jockey (dependiendo de la cantidad
+	de carreras ganadas puede ser aprendiz o profesional).
 	
 	\item \textbf{Peso} Peso actual del jockey.
 	
@@ -423,15 +441,18 @@ Representa a los encargados de montar los equinos en las distintas carreras de l
 
 \subsection{Stud}
 
-Representa las entidades dueñas de uno o varios equinos que correrán en los distintos encuentros.
+Representa las entidades dueñas de uno o varios equinos que correrán en los distintos
+ encuentros, en representación del mismo.
 
 \begin{itemize}
 
-	\item \textbf{\uline{Nombre}} Nombre del stud.
+	\item \textbf{\uline{Nombre}} Identificador del stud.
 	
-	\item \textbf{ColorGorra} Color de la gorra que usarán los jockeys que representen al stud en una carrera.
+	\item \textbf{ColorGorra} Color de la gorra que usarán los jockeys que 
+	representen al stud en una carrera.
 	
-	\item \textbf{ColorChaqueta} Color de la chaqueta que usarán los jockeys que representen al stud en una carrera.
+	\item \textbf{ColorChaqueta} Color de la chaqueta que usarán los jockeys 
+	que representen al stud en una carrera.
 	
 \end{itemize}
 
