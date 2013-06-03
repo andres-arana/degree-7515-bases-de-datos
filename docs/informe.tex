@@ -37,7 +37,7 @@
 \usepackage[normalem]{ulem}
 
 % Formato de listados de código
-\lstset{
+\lstset{%
   basicstyle=\footnotesize\ttfamily,
   numberstyle=\tiny,
   numbersep=5pt,
@@ -67,7 +67,7 @@
 \title{\textbf{Trabajo Práctico: Hiposoft}}
 
 % Información sobre los autores.
-\author{
+\author{%
   Andrés Gastón Arana,     \textit{P. 86.203}                      \\
   Diego Martín Costa,      \textit{P. 78.189}                      \\
   Javier Daniel Zaniratto, \textit{P. 90.886}                      \\
@@ -179,7 +179,7 @@ relacionado con los studs de la forma indicada.
 
 \subsection{Diagrama de entidad-interrelación}
 
-En la figura \ref{fig:der} se incluye el diagrama de entidad-interrelación
+En la figura~\ref{fig:der} se incluye el diagrama de entidad-interrelación
 final desarrollado para representar el dominio modelado cuyo relevamiento se
 detalla en el enunciado.
 
@@ -456,13 +456,51 @@ Representa las entidades dueñas de uno o varios equinos que correrán en los di
 	
 \end{itemize}
 
+
+\section{Resumen del diccionario}
+
+\begin{itemize}
+
+  \item \emph{Hipodromo}(\uline{Nombre}, Direccion)
+
+  \item \emph{Encuentro}(\uline{Numero}, Fecha, \dashuline{HipodromoNombre})
+
+  \item \emph{Pista}(\uline{Nombre}, \uline{\dashuline{HipodromoNombre}}, 
+    Tipo, NumeroAndariveles)
+
+  \item \emph{Carrera}(\uline{Numero}, \uline{\dashuline{EncuentroNumero}}, 
+    Tipo, EstadoPista, EstadoTiempo, SexoEquinos, Distancia, \dashuline{PistaNombre}, 
+    \dashuline{PistaHipodromoNombre}, Hora)
+
+  \item \emph{Stud}(\uline{Nombre}, ColorChaqueta, ColorGorra)
+
+  \item \emph{Persona}(\uline{DNI}, Nombres, Apellidos, \dashuline{StudNombre})
+
+  \item \emph{Cuidador}(\uline{\dashuline{PersonaDNI}})
+
+  \item \emph{Entrenador}(\uline{\dashuline{PersonaDNI}})
+
+  \item \emph{Jockey}(\uline{\dashuline{PersonaDNI}}, Categoria, Peso, Talla)
+
+  \item \emph{Equino}(\uline{Nombre}, Tipo, Pelaje, Sexo, Handicap, 
+    \dashuline{StudNombre}, \dashuline{PadreNombre}, \dashuline{MadreNombre}, 
+    \dashuline{CuidadorPersonaDNI}, \dashuline{EntrenadorPersonaDNI})
+
+  \item \emph{Participacion}(\uline{\dashuline{JokeyPersonaDNI}}, 
+    \uline{\dashuline{EquinoNombre}}, \uline{\dashuline{CarreraNumero}}, 
+    \uline{\dashuline{CarreraEncuentroNumero}}, Tiempo, Andarivel, PesoJockey, 
+    TallaJockey, HandicapEquino, \dashuline{StudNombre}, Descalificado)
+
+
+\end{itemize}
+
 \section{Modelo relacional}
 
 \subsection{Diagrama relacional}
 
-En la figura \ref{fig:relacional} se incluye un diagrama representativo del
+En la figura~\ref{fig:relacional} se incluye un diagrama representativo del
 modelo relacional desarrollado para el modelo de entidad-interrelación
-detallado en la sección \ref{sec:der}.
+detallado en la sección~\ref{sec:der}.
 
 \begin{figure}[h!t]
   \centering
