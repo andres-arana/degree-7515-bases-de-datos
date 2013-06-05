@@ -75,6 +75,8 @@
   \\
   \normalsize{1er. Cuatrimestre de 2013}                           \\
   \normalsize{75.15 - Bases de datos}                              \\
+  \normalsize{Grupo Nro 1}		                           \\
+  \normalsize{Docente: Alberto Fasce}	                           \\
   \normalsize{Facultad de Ingeniería, Universidad de Buenos Aires}
 }
 \date{}
@@ -226,6 +228,11 @@ cuales se disputan las carreras de caballos.
 
 \end{itemize}
 
+\subsection{Realiza}
+
+Representa una relación entre los Hipódromos y los Encuentros, indicando que cada
+encuentro se realiza en un Hipódromo. 
+
 \subsection{Encuentro}
 
 Representa un conjunto de carreras equinas que se disputaron o se disputarán de
@@ -244,6 +251,11 @@ determinada.
     desarrollan las carreras del encuentro.
 
 \end{itemize}
+
+\subsection{Tiene}
+
+Representa una relación entre los Hipódromos y las Pistas, indicando que cada
+Hipódromo puede tener 1 o más Pistas. 
 
 \subsection{Pista}
 
@@ -264,6 +276,11 @@ Representa la pista de los hipódromos en donde se realizarán carreras equinas.
     pista.
 
 \end{itemize}
+
+\subsection{Consta de}
+
+Representa una relación entre los Encuentros y las Carreras, indicando que cada
+Encuentro puede estar compuesto por entre 12 y 15 carreras.
 
 \subsection{Carrera}
 
@@ -304,6 +321,11 @@ intentando recorrer una distancia dada en una pista en el menor tiempo posible.
 
 \end{itemize}
 
+\subsection{Se Corre en}
+
+Representa una relación entre las Pistas y las Carreras, indicando que cada
+Carrera se corre en 1 Pista.
+
 \subsection{Equino}
 
 Representa a los equinos que podrán participar de las carreras a disputarse en
@@ -339,8 +361,28 @@ los encuentros, representando a un stud.
   
 \end{itemize}
 
+\subsection{Pertenece a}
 
+Representa una relación entre el Equino y el Stud, indicando que cada Equino pertenece a 
+1 Stud.
 
+\subsection{Es Padre de}
+
+Representa una relación entre dos Equinos, indicando que un Equino es padre de otro equino.
+
+\subsection{Es Madre de}
+
+Representa una relación entre dos Equinos, indicando que un Equino es madre de otro equino.
+
+\subsection{Entrena}
+
+Representa una relación entre un Equino y un Entrenador, indicando que un equino tiene un
+entrenador encargado de Entrenarlo
+
+\subsection{Cuida}
+
+Representa una relación entre un Equino y un Cuidador, indicando que un equino tiene un Cuidador
+encargargado de su cuidado.
 
 \subsection{Participación}
 
@@ -417,6 +459,11 @@ Representa a una persona física.
 	\item \textbf{StudNombre} Identificador del stud para el cual trabaja la persona.
 	
 \end{itemize}
+
+\subsection{Trabaja En}
+
+Representa una relación entre una Persona y un Stud, indicando que todas las personas (cuidadores, 
+entrenadores, jockeys) trabajan para un Stud.
 
 \subsection{Jockey}
 
