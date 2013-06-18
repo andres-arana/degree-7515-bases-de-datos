@@ -4,13 +4,16 @@ build:
 	-mkdir -p build
 	-mkdir -p build/images
 
-build/informe.pdf: build build/images/der.png build/images/rel.png docs/informe.tex
+build/informe.pdf: build build/images/der.png build/images/der2.png build/images/rel.png docs/informe.tex
 	pdflatex --output-directory build docs/informe.tex
 	pdflatex --output-directory build docs/informe.tex
 	pdflatex --output-directory build docs/informe.tex
 
 build/images/der.png: build docs/diagramas/der.dia
 	dia --export=build/images/der.png --filter=png docs/diagramas/der.dia
+
+build/images/der2.png: build docs/diagramas/der2.dia
+	dia --export=build/images/der2.png --filter=png docs/diagramas/der2.dia
 
 build/images/rel.png: build docs/diagramas/rel.dia
 	dia --export=build/images/rel.png --filter=png docs/diagramas/rel.dia

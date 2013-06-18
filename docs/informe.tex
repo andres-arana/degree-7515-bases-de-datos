@@ -566,11 +566,69 @@ creación de usuarios, roles, schemas y bases de datos correspondientes.
 
 \clearpage
 
+\part{Segunda Entrega}
+\section{Modelo de entidad-interrelación} \label{sec:der2}
+
+\subsection{Diagrama de entidad-interrelación (de las modificaciones)}
+
+En la figura~\ref{fig:der2} se incluye el diagrama de entidad-interrelación
+final de las modificaciones realizadas para la segunda entrega. Solo se incluyen
+entidades e interrelaciones nuevas o modificadas respecto de la entrega previa.
+
+\subsection{Modificaciones realizadas}
+
+Las modificaciones realizadas para la segunda entrega fueron:
+\begin{enumerate}
+
+  \item La entidad JOCKEY no es mas heredera de la entidad PERSONA, por lo tanto
+	ahora tendra los atributos Nombres, Apellido y DNI. Ademas, un Jockey podrá
+	estar asociado a mas de un Stud a través de la nueva interrelación CONTRATA.
+    Dicha interrelacióñ tendra los atributos HonorarioFijo y PorcentajePremio. 
+
+  \item La entidad CUIDADOR ahora tiene el atributo Sueldo.
+
+  \item La entidad ENTRENADOR ahora tiene los atributos FechaBaja y Sueldo. 
+
+  \item Hay una nueva entidad ACCIONISTA que ES UNA persona y hereda los atributos
+	de PERSONA. Ademas tiene los atributos no comunes ContribucionFija y 
+    PorcentajeParticipacion
+  
+  \item La entidad EQUINO ahora esta relaciona con la entidad HIPODROMO a traves
+    de la nueva interrelación ALOJA EN. 
+
+  \item Hay una nueva entidad débil MOVIMIENTO con los atributos Fecha, Monto y 
+    concepto, que se relacion con la entidad STUD a traves de la interrelación
+    TIENE.
+
+  \item Las entidades EQUINO y CARRERA estan ahora relacionadas a través de la
+    entidad APUESTA, que posee un atributo Monto. 
+
+\end{enumerate}
+
+\begin{figure}[h!t]
+  \centering
+  \includegraphics[width=1.5\textwidth, angle=90]{build/images/der2.png}
+  \caption{Diagrama de entidad-interrelación} \label{fig:der2}
+\end{figure}
+
+\FloatBarrier
+
+\section{Diccionario de datos (de las modificaciones)}
+
+\section{Resumen del Diccionario (de las modificaciones)}
+
+\section{Modelo Relacional completo}
+
+
 \part{Apéndice}
 \appendix
 
 \section{Enunciado original}\label{sec:enunciado}
 \includepdf[pages={-}, frame=true, pagecommand={}, noautoscale=true, scale=0.7]{docs/enunciado.pdf}
+
+\section{Enunciado segunda entrega}\label{sec:enunciado}
+\includepdf[pages={-}, frame=true, pagecommand={}, noautoscale=true, scale=0.7]{docs/TP0106.pdf}
+
 
 \end{document}
 
