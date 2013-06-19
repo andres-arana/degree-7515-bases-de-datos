@@ -581,9 +581,9 @@ Las modificaciones realizadas para la segunda entrega fueron:
 \begin{enumerate}
 
   \item La entidad JOCKEY no es mas heredera de la entidad PERSONA, por lo tanto
-	ahora tendra los atributos Nombres, Apellido y DNI. Ademas, un Jockey podrá
+	ahora tendra los atributos Nombres, Apellido y DNI. Además, un Jockey podrá
 	estar asociado a mas de un Stud a través de la nueva interrelación CONTRATA.
-    Dicha interrelacióñ tendra los atributos HonorarioFijo y PorcentajePremio. 
+  Dicha interrelacióñ tendrá los atributos HonorarioFijo y PorcentajePremio. 
 
   \item La entidad CUIDADOR ahora tiene el atributo Sueldo.
 
@@ -591,24 +591,24 @@ Las modificaciones realizadas para la segunda entrega fueron:
 
   \item Hay una nueva entidad ACCIONISTA que ES UNA persona y hereda los atributos
 	de PERSONA. Ademas tiene los atributos no comunes ContribucionFija y 
-    PorcentajeParticipacion
+  PorcentajeParticipacion.
   
   \item La entidad EQUINO ahora esta relaciona con la entidad HIPODROMO a traves
     de la nueva interrelación ALOJA EN. 
 
-  \item Hay una nueva entidad débil MOVIMIENTO con los atributos Fecha, Monto y 
-    concepto, que se relacion con la entidad STUD a traves de la interrelación
+  \item Hay una nueva entidad débil MOVIMIENTO con los atributos Fecha, Monto,
+    Concepto y Número que se relacion con la entidad STUD a traves de la interrelación
     TIENE.
 
-  \item Las entidades EQUINO y CARRERA estan ahora relacionadas a través de la
-    entidad APUESTA, que posee un atributo Monto. 
+  \item Hay una nueva entidad APUESTA que esta relacionada con las entidades Equino, 
+    Carrera y Jockey. Tiene atributos Monto y Número. 
 
 \end{enumerate}
 
 \begin{figure}[h!t]
   \centering
   \includegraphics[width=1.5\textwidth, angle=90]{build/images/der2.png}
-  \caption{Diagrama de entidad-interrelación} \label{fig:der2}
+  \caption{Diagrama de entidad-interrelación de las modificaciones} \label{fig:der2}
 \end{figure}
 
 \FloatBarrier
@@ -711,11 +711,25 @@ participar en las Carreras de los Encuentros con los Equinos del Stud.
 
 \subsection{Apuesta}
 
-Representa una relación entre una Carrera y un Equino, en la cual un apostador
-apostó una suma de dinero, a que el Equino llegue en la primera posición en 
-dicha carrera. 
+Representa una apuesta realizada por un apostador sobre la participación de un Equino
+montado por un Jockey en una Carrera. El apostador apuesta una suma de dinero a que
+el equino llega en primera posición en dicha carrera.
 
 \begin{itemize}
+
+  \item \textbf{\uline{\dashuline{JockeyDNI}}} Identificador del Jockey que monta
+    al equino en la Participación en la que se apuesta.
+
+  \item \textbf{\uline{\dashuline{EquinoNombre}}} Identificador del equino al cual
+    se apuesta.
+  
+  \item \textbf{\uline{\dashuline{CarreraNúmero}}} Identificador de la carrera en la 
+    cual se apuesta.
+  
+  \item \textbf{\uline{\dashuline{CarreraEncuentroNúmero}}} Identificador del encuentro
+    al cual pertence la carrera en la que se apuesta
+
+  \item \textbf{\uline{Número}} Identificador de la apuesta.
 
   \item \textbf{Monto} Suma de dinero que el apostador apostó al caballo en la
     Carrera.
@@ -764,7 +778,8 @@ comida, etc) son registrados en esta entidad.
 
   \item \emph{Movimiento}(\uline{\dashuline{StudNombre}}, \uline{Numero}, Fecha, Monto, Concepto)
 
-  \item \emph{Apuesta}(\uline{\dashuline{EquinoNombre}}, \uline{\dashuline{CarreraNumero}}, \uline{\dashuline{CarreraEncuentroNumero}}, Monto)
+  \item \emph{Apuesta}(\uline{\dashuline{JockeyDNI}}, \uline{\dashuline{EquinoNombre}}, \uline{\dashuline{CarreraNumero}}, 
+  \uline{\dashuline{CarreraEncuentroNumero}}, \uline{Numero}, Monto)
   
   \item \emph{Contrata}(\uline{\dashuline{StudNombre}}, \uline{\dashuline{JockeyDNI}}, HonorarioFijo, PorcentajePremio) 
 
@@ -772,6 +787,43 @@ comida, etc) son registrados en esta entidad.
 
 
 \section{Modelo Relacional completo}
+
+\subsection{Diagrama relacional}
+
+En la figura~\ref{fig:rel2} se incluye un diagrama representativo del
+modelo relacional completo desarrollado para el modelo de entidad-interrelación
+modificado para la segunda entrega.
+
+\begin{figure}[h!t]
+  \centering
+  \includegraphics[width=1.5\textwidth, angle=90]{build/images/rel2.png}
+  \caption{Modelo relacional} \label{fig:rel2}
+\end{figure}
+
+\FloatBarrier
+
+\subsection{Scripts de Modificación}
+
+A continuación se incluyen los scripts de modificación de las tablas de las tablas
+existentes, y creación de las tablas nuevas, para la segunda entrega.
+
+\lstinputlisting{sql/schema2.sql}
+
+\clearpage
+
+\section{Consultas}
+
+\begin{enumerate}
+
+  \item El monto total ganado por el jockey Juan Arias en el año 2011, por
+    comisión de apuestas.
+
+  \item Mostrar el Stud que gasto más recursos para obtener cada premio.
+
+  \item Mostrar los caballos que mejores resultados económicos generaron
+    para sus Studs.
+
+\end{enumerate}
 
 
 \part{Apéndice}
