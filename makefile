@@ -46,3 +46,4 @@ db-console:
 db-reset:
 	psql -h localhost -U postgres -p 3000 --password -a -f sql/database.sql -v client_min_messages='warning'
 	psql -h localhost -U postgres -p 3000 -d hiposoft --password -a -f sql/schema.sql -v client_min_messages='warning'
+	psql -h localhost -U postgres -p 3000 -d hiposoft --password -a -f sql/schema2.sql -v client_min_messages='warning'

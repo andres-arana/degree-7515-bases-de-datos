@@ -116,7 +116,7 @@
 % ----------------------------------------------------------------------
 % Desarrollo
 % ----------------------------------------------------------------------
-\part{Desarrollo}
+\part{Primer entrega}
 
 \section{Metodología y desarrollo}
 
@@ -567,17 +567,19 @@ creación de usuarios, roles, schemas y bases de datos correspondientes.
 \clearpage
 
 \part{Segunda Entrega}
+
 \section{Modelo de entidad-interrelación} \label{sec:der2}
 
 \subsection{Diagrama de entidad-interrelación (de las modificaciones)}
 
-En la figura~\ref{fig:der2} se incluye el diagrama de entidad-interrelación
-de las modificaciones realizadas para la segunda entrega. Solo se incluyen
+En la figura~\ref{fig:der2} se incluye el diagrama de entidad-interrelación de
+las modificaciones realizadas para la segunda entrega. Solo se incluyen
 entidades e interrelaciones nuevas o modificadas respecto de la entrega previa.
 
 \subsection{Modificaciones realizadas}
 
 Las modificaciones realizadas para la segunda entrega fueron:
+
 \begin{enumerate}
 
   \item La entidad JOCKEY no es mas heredera de la entidad PERSONA, por lo tanto
@@ -603,6 +605,9 @@ Las modificaciones realizadas para la segunda entrega fueron:
   \item Hay una nueva entidad APUESTA que esta relacionada con las entidades Equino, 
     Carrera y Jockey. Tiene atributos Monto y Número. 
 
+  \item Hay una nueva entidad PREMIO que esta relacioanda con la entidad
+    CARRERA. Tiene como atributos posicion y monto.
+
 \end{enumerate}
 
 \begin{figure}[h!t]
@@ -613,7 +618,7 @@ Las modificaciones realizadas para la segunda entrega fueron:
 
 \FloatBarrier
 
-\section{Diccionario de datos (de las modificaciones)}
+\section{Adiciones al diccionario de datos}
 
 \subsection{Accionista}
 
@@ -762,12 +767,30 @@ comida, etc) son registrados en esta entidad.
       
 \end{itemize}
 
+\subsection{Premio}
+
+Representa el monto a ganar como premio, dada una posición, en una carrera.
+
+\begin{itemize}
+
+  \item \textbf{\uline{\dashuline{CarreraNumero}}} Identificador de la carrera
+    a la que pertenece este premio.
+
+  \item \textbf{\uline{\dashuline{CarreraEncuentroNumero}}} Identificador del
+    encuentro al que pertenece la carrera de este premio.
+
+  \item \textbf{\uline{Posicion}} Indica la posición en la que debe llegar un
+    participante para poder reclamar este premio.
+
+  \item \textbf{Monto} Indica el monto con el que se premia la participación.
+
+\end{itemize}
 
 \section{Resumen del Diccionario (de las modificaciones)}
 
 \begin{itemize}
 
-  \item \emph{Accionista}(\uline{\dashuline{PersonaDNI}}, ContribucionFija, 
+  \item \emph{Accionista}(\uline{\dashuline{PersonaDNI}}, ContribucionFija,
     PorcenParticipacion)
 
   \item \emph{Cuidador}(\uline{\dashuline{PersonaDNI}}, Sueldo)
@@ -776,15 +799,20 @@ comida, etc) son registrados en esta entidad.
 
   \item \emph{Jockey}(\uline{DNI}, Categoria, Peso, Talla, Nombres, Apellido)
 
-  \item \emph{Movimiento}(\uline{\dashuline{StudNombre}}, \uline{Numero}, Fecha, Monto, Concepto)
+  \item \emph{Movimiento}(\uline{\dashuline{StudNombre}}, \uline{Numero},
+    Fecha, Monto, Concepto)
 
-  \item \emph{Apuesta}(\uline{\dashuline{JockeyDNI}}, \uline{\dashuline{EquinoNombre}}, \uline{\dashuline{CarreraNumero}}, 
-  \uline{\dashuline{CarreraEncuentroNumero}}, \uline{Numero}, Monto)
-  
-  \item \emph{Contrata}(\uline{\dashuline{StudNombre}}, \uline{\dashuline{JockeyDNI}}, HonorarioFijo, PorcentajePremio) 
+  \item \emph{Apuesta}(\uline{\dashuline{JockeyDNI}},
+    \uline{\dashuline{EquinoNombre}}, \uline{\dashuline{CarreraNumero}},
+    \uline{\dashuline{CarreraEncuentroNumero}}, \uline{Numero}, Monto)
+
+  \item \emph{Contrata}(\uline{\dashuline{StudNombre}},
+    \uline{\dashuline{JockeyDNI}}, HonorarioFijo, PorcentajePremio)
+
+  \item \emph{Premio}(\uline{\dashuline{CarreraNumero}},
+    \uline{\dashuline{CarreraEncuentroNumero}}, \uline{Posición}, Monto)
 
 \end{itemize}
-
 
 \section{Modelo Relacional completo}
 
@@ -804,8 +832,10 @@ modificado para la segunda entrega.
 
 \subsection{Scripts de Modificación}
 
-A continuación se incluyen los scripts de modificación de las tablas de las tablas
-existentes, y creación de las tablas nuevas, para la segunda entrega.
+A continuación se incluyen los scripts de modificación de las tablas
+existentes, y creación de las tablas nuevas, para crear la estructura de la
+base de datos necesaria para soportar el modelo detallado en las secciones
+anteriores.
 
 \lstinputlisting{sql/schema2.sql}
 
@@ -813,18 +843,58 @@ existentes, y creación de las tablas nuevas, para la segunda entrega.
 
 \section{Consultas}
 
-\begin{enumerate}
+A continuación se enumeran las consultas pedidas en el trabajo práctico y las
+soluciones a cada una de ellas, de acuerdo al modelo de datos desarrollado.
 
-  \item El monto total ganado por el jockey Juan Arias en el año 2011, por
-    comisión de apuestas.
+\subsection{Consulta 1}
 
-  \item Mostrar el Stud que gasto más recursos para obtener cada premio.
+Se pide el monto total ganado por el jockey Juan Arias en el año 2011 por
+comisión de apuestas.
 
-  \item Mostrar los caballos que mejores resultados económicos generaron
-    para sus Studs.
+\begin{lstlisting}
 
-\end{enumerate}
+  SELECT 
+    SUM(premio.monto * contratacion.porcentaje_premio)
+  FROM
+    participacion,
+    carrera,
+    encuentro,
+    jockey,
+    premio,
+    stud,
+    contratacion,
+  WHERE
+    participacion.carrera_numero = carrera.numero
+    AND participacion.carrera_encuentro_numero = carrera.encuentro_numero
+    AND encuentro.numero = carrera.encuentro_numero
+    AND jockey.dni = participacion.jockey_dni
+    AND premio.carrera_numero = carrera.numero
+    AND premio.carrera_encuentro_numero = carrera.encuentro_numero
+    AND stud.nombre = participacion.stud_nombre
+    AND contratacion.jockey_dni = jockey.dni
+    AND contratacion.stud_nombre = stud.nombre
+    AND jockey.nombres = Juan Arias
+    AND encuentro.fecha >= 01/01/2011
+    AND encuentro.fecha <= 31/12/2011
 
+\end{lstlisting}
+
+\subsection{Consulta 2}
+
+Se pide el Stud que gasto más recursos para obtener cada premio.
+
+\begin{lstlisting}
+
+\end{lstlisting}
+
+\subsection{Consulta 3}
+
+Se pide encontrar los caballos que mejores resultados económicos generaron para
+sus Studs.
+
+\begin{lstlisting}
+
+\end{lstlisting}
 
 \part{Apéndice}
 \appendix

@@ -9,11 +9,31 @@ UPDATE jockey SET nombres = (SELECT nombres FROM persona WHERE persona.dni = joc
 
 UPDATE jockey SET apellidos = (SELECT apellidos FROM persona WHERE persona.dni = jockey.persona_dni);
 
-DELETE FROM persona WHERE EXISTS(SELECT * FROM JOCKEY WHERE JOCKEY.persona_dni = persona.dni)
+DELETE FROM persona WHERE EXISTS(SELECT * FROM JOCKEY WHERE JOCKEY.persona_dni = persona.dni);
 
 ALTER TABLE jockey RENAME COLUMN persona_dni TO dni;
 
 ALTER TABLE participacion RENAME COLUMN jockey_persona_dni TO jockey_dni;
+
+-- Agregado de campo posicion en la participacion
+ALTER TABLE participacion ADD posicion integer;
+
+-- Agregado de tabla de premios por posicion
+CREATE TABLE premio (
+  carrera_numero integer NOT NULL,
+  carrera_encuentro_numero integer NOT NULL,
+  posicion integer NOT NULL,
+  monto decimal NOT NULL
+);
+
+ALTER TABLE premio 
+  ADD CONSTRAINT pk_premio
+  PRIMARY KEY(carrera_numero, carrera_encuentro_numero, posicion);
+
+ALTER TABLE premio
+  ADD CONSTRAINT fk_premio_carrera
+  FOREIGN KEY (carrera_numero, carrera_encuentro_numero)
+  REFERENCES carrera(numero, encuentro_numero);
 
 -- Agregado de campo a Tabla Cuidador
 ALTER TABLE cuidador ADD sueldo decimal NOT NULL;
