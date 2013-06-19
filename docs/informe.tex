@@ -572,7 +572,7 @@ creación de usuarios, roles, schemas y bases de datos correspondientes.
 \subsection{Diagrama de entidad-interrelación (de las modificaciones)}
 
 En la figura~\ref{fig:der2} se incluye el diagrama de entidad-interrelación
-final de las modificaciones realizadas para la segunda entrega. Solo se incluyen
+de las modificaciones realizadas para la segunda entrega. Solo se incluyen
 entidades e interrelaciones nuevas o modificadas respecto de la entrega previa.
 
 \subsection{Modificaciones realizadas}
@@ -615,7 +615,161 @@ Las modificaciones realizadas para la segunda entrega fueron:
 
 \section{Diccionario de datos (de las modificaciones)}
 
+\subsection{Accionista}
+
+Representa una persona que en sociedad con otras personas (otros accionistas)
+conforman un Stud.
+
+\begin{itemize}
+
+  \item \textbf{\uline{\dashuline{PersonaDNI}}} DNI del accionista.
+
+  \item \textbf{ContribucionFija} Contribución mensual que deberá aportar
+    un accionista para el mantenimiento de las actividades del Stud. Es calculada
+    en base al porcentaje de participacion del accionsita en el Stud.
+
+  \item \textbf{PorcenParticipacion} Es el porcentaje en el cual el accionista 
+  participa de los gastos y de los beneficios del Stud. 
+
+\end{itemize}
+
+\subsection{Cuidador}
+
+Representa a las personas encargadas del cuidado de los equinos.
+
+\begin{itemize}
+
+  \item \textbf{\uline{\dashuline{PersonaDNI}}} DNI del cuidador.
+
+  \item \textbf{Sueldo} Sueldo mensual que el Stud le paga al cuidador.
+  
+\end{itemize}
+
+\subsection{Entrenador}
+
+Representa las personas que se encargan de entrenar a los equinos.
+
+\begin{itemize}
+
+  \item \textbf{\uline{\dashuline{PersonaDNI}}} DNI del entrenador.
+
+  \item \textbf{Sueldo} Sueldo mensual que el Stud le paga al entrenador.
+
+  \item \textbf{FechaBaja} Fecha en la cual el entrenador fue removido del 
+    último Stud en el que trabajó. Debe pasar al menos un año para poder
+    trabajar en otro Stud. 
+  
+\end{itemize}
+
+\subsection{Alojado En}
+
+Representa una relacion entre un Equino y el Hipódromo en el cual
+se encuentra la caballeriza en la que se aloja el Equino.
+
+\subsection{Jockey}
+
+Representa a los encargados de montar los equinos en las distintas carreras 
+de los encuentros disputados en los hipódromos, representando a un stud.
+
+\begin{itemize}
+
+  \item \textbf{\uline{DNI}} DNI del Jockey.
+  
+  \item \textbf{Nombres} Nombres del Jockey.
+  
+  \item \textbf{Apellidos} Apellidos del Jockey.
+
+  \item \textbf{Categoría} Categoría del Jockey (dependiendo de la cantidad
+  de carreras ganadas puede ser aprendiz o profesional).
+  
+  \item \textbf{Peso} Peso actual del jockey.
+  
+  \item \textbf{Talla} Talla actual del jockey.  
+  
+\end{itemize}
+
+\subsection{Contrata}
+
+Representa la relación entre un Stud, y un Jockey, contratado por el Stud, para
+participar en las Carreras de los Encuentros con los Equinos del Stud.
+
+\begin{itemize}
+
+  \item \textbf{\uline{\dashuline{StudNombre}}} Identificador del stud que contrata
+    al Jockey.
+
+  \item \textbf{\uline{\dashuline{JockeyDNI}}} Identificador del Jockey que es
+    contratado por el stud.
+
+  \item \textbf{HonorarioFijo} Monto que el Jockey percibe del Stud por cada
+    participación en una Carrera montando un Equino del Stud.
+  
+  \item \textbf{PorcentajePremio} Porcentaje que el Jockey percibe de los premios
+    recibidos por los Studs por las Carreras ganadas por dicho Jockey.
+    
+\end{itemize}
+
+\subsection{Apuesta}
+
+Representa una relación entre una Carrera y un Equino, en la cual un apostador
+apostó una suma de dinero, a que el Equino llegue en la primera posición en 
+dicha carrera. 
+
+\begin{itemize}
+
+  \item \textbf{Monto} Suma de dinero que el apostador apostó al caballo en la
+    Carrera.
+
+\end{itemize}
+
+\subsection{Tiene}
+
+Representa una relación entre un Stud y un Movimiento Contable.
+
+\subsection{Movimiento}
+
+Representa un movimiento contable de un Stud. Todos los movimientos de caja
+del stud (cobro de premios, pago de canon al Hipódromo, gastos de veterinario, 
+comida, etc) son registrados en esta entidad.
+
+\begin{itemize}
+
+  \item \textbf{\uline{\dashuline{StudNombre}}} Identificador del stud a cual pertenece el movimiento
+
+  \item \textbf{\uline{Número}} Indica el número de movimiento.
+
+  \item \textbf{Fecha} Indica la fecha del movimiento.
+
+  \item \textbf{Monto} Indica el monto del movimiento. Si es negativo, es un 
+  gasto o salida de dinero. Si es positivo, es un cobro o entrada de dinero.
+
+  \item \textbf{Concepto} Indica el Concepto del Movimiento, por ejemplo 
+  'cobro de premio' o 'pago a veterinario'.
+      
+\end{itemize}
+
+
 \section{Resumen del Diccionario (de las modificaciones)}
+
+\begin{itemize}
+
+  \item \emph{Accionista}(\uline{\dashuline{PersonaDNI}}, ContribucionFija, 
+    PorcenParticipacion)
+
+  \item \emph{Cuidador}(\uline{\dashuline{PersonaDNI}}, Sueldo)
+
+  \item \emph{Entrenador}(\uline{\dashuline{PersonaDNI}}, Sueldo, FechaBaja)
+
+  \item \emph{Jockey}(\uline{DNI}, Categoria, Peso, Talla, Nombres, Apellido)
+
+  \item \emph{Movimiento}(\uline{\dashuline{StudNombre}}, \uline{Numero}, Fecha, Monto, Concepto)
+
+  \item \emph{Apuesta}(\uline{\dashuline{EquinoNombre}}, \uline{\dashuline{CarreraNumero}}, \uline{\dashuline{CarreraEncuentroNumero}}, Monto)
+  
+  \item \emph{Contrata}(\uline{\dashuline{StudNombre}}, \uline{\dashuline{JockeyDNI}}, HonorarioFijo, PorcentajePremio) 
+
+\end{itemize}
+
 
 \section{Modelo Relacional completo}
 
