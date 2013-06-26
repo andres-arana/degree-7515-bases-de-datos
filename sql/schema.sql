@@ -229,7 +229,7 @@ ALTER TABLE encuentro
 -- Unicidad de participacion de equinos por encuentro
 ALTER TABLE participacion
   ADD CONSTRAINT unique_equino_encuentro
-  UNIQUE (equino_nombre, carrera_numero, carrera_encuentro_numero);
+  UNIQUE (equino_nombre, carrera_encuentro_numero);
 
 -- Distancia de la carrera mayor que cero
 ALTER TABLE carrera
