@@ -1,3 +1,12 @@
+-- Creacion de nueva tabla movimiento	
+CREATE TABLE movimiento (
+    stud_nombre varchar NOT NULL,
+    numero integer NOT NULL,
+	concepto varchar NOT NULL,
+    fecha date NOT NULL,     	
+    monto decimal NOT NULL
+);
+
 -- Separacion de Tabla Jockey
 ALTER TABLE jockey DROP CONSTRAINT fk_jockey_persona;
 
@@ -124,15 +133,6 @@ ALTER TABLE apuesta
     FOREIGN KEY (jockey_dni)
     REFERENCES jockey(dni);
 	
--- Creacion de nueva tabla movimiento	
-CREATE TABLE movimiento (
-    stud_nombre varchar NOT NULL,
-    numero integer NOT NULL,
-	concepto varchar NOT NULL,
-    fecha date NOT NULL,     	
-    monto decimal NOT NULL
-);
-
 ALTER TABLE movimiento
     ADD CONSTRAINT fk_movimiento_stud
     FOREIGN KEY (stud_nombre)
