@@ -884,7 +884,39 @@ comisión de apuestas.
 Se pide el Stud que gasto más recursos para obtener cada premio.
 
 \begin{lstlisting}
-
+  SELECT
+    stud_nombre
+  FROM
+    (
+    SELECT
+      stud_nombre,
+      (premios / gastos) promedio,
+      max(premios/gastos) max_promedio
+    FROM
+      (
+      SELECT
+        movimiento.stud_nombre,
+        count(*) as premios,
+        SUM(monto) gastos
+      FROM
+        movimiento 
+      INNER JOIN participacion p
+      ON movimiento.stud_nombre = "a"
+      WHERE
+        NOT EXISTS
+          (
+          SELECT *
+          FROM participacion p2
+          WHERE p2.tiempo < p.tiempo
+            AND p2.carrera_numero = p.carrera_numero
+            AND p2.carrera_encuentro_numero = p.carrera_encuentro_numero
+            AND p2.descalificado = 0
+          )
+        AND movimiento.monto < 0
+        GROUP BY movimiento.stud_nombre
+      ) premios_gastos
+    GROUP BY stud_nombre, (premios / gastos)) premios_promedios
+    WHERE promedio = max_promedio
 \end{lstlisting}
 
 \subsection{Consulta 3}
@@ -893,7 +925,43 @@ Se pide encontrar los caballos que mejores resultados económicos generaron para
 sus Studs.
 
 \begin{lstlisting}
-
+  SELECT *
+  FROM
+    (
+    SELECT
+      equino_nombre,
+      stud_nombre,
+      count(*) as ganadas 
+    FROM
+      participacion p
+    WHERE
+      NOT EXISTS
+        (
+        SELECT *
+        FROM participacion p2
+        WHERE p2.tiempo < p.tiempo
+        AND p2.carrera_numero = p.carrera_numero
+        AND p2.carrera_encuentro_numero = p.carrera_encuentro_numero
+        AND p2.descalificado = 0
+        )
+    GROUP BY
+      equino_nombre,
+      stud_nombre
+    ) carr_ganadas,
+    (
+    SELECT
+      equino_nombre,
+      stud_nombre,
+      count(*) participadas
+    FROM
+      participacion p
+    GROUP BY
+      equino_nombre,
+      stud_nombre
+    ) carr_participadas
+  WHERE
+    carr_participadas.equino_nombre = carr_ganadas.equino_nombre
+    AND carr_participadas.stud_nombre = carr_ganadas.stud_nombre
 \end{lstlisting}
 
 \part{Apéndice}
