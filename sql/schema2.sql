@@ -18,6 +18,14 @@ ALTER TABLE participacion RENAME COLUMN jockey_persona_dni TO jockey_dni;
 -- Agregado de campo posicion en la participacion
 ALTER TABLE participacion ADD posicion integer;
 
+-- Agregado de campo equino_nombre en el movimiento
+ALTER TABLE movimiento ADD equino_nombre varchar;
+
+ALTER TABLE movimiento
+  ADD CONSTRAINT fk_movimiento_equino
+  FOREIGN KEY (equino_nombre)
+  REFERENCES equino(nombre);
+
 -- Agregado de tabla de premios por posicion
 CREATE TABLE premio (
   carrera_numero integer NOT NULL,
@@ -167,3 +175,73 @@ ALTER TABLE contratacion
 ALTER TABLE contratacion
   ADD CONSTRAINT honorario_fijo_gtzero
   CHECK (honorario_fijo > 0);	
+
+-- VIEW balance_por_stud_equino
+
+CREATE view balance_por_stud_equino as
+SELECT 
+	stud.nombre stud, 
+	movimiento.equino_nombre equino, 
+	SUM(movimiento.monto) resultado
+FROM
+	movimiento,
+	stud
+WHERE
+	movimiento.equino_nombre IS NOT NULL AND 
+	movimiento.stud_nombre = stud.nombre
+GROUP BY stud.nombre, movimiento.equino_nombre;
+
+
+-- VIEW premios_por_equino
+CREATE view premios_por_equino as
+SELECT 
+    stud.nombre stud,
+    equino.nombre equino,
+    SUM(premio.monto) monto
+  FROM
+    participacion,
+    carrera,
+    premio,
+    stud,
+    equino
+  WHERE
+    participacion.carrera_numero = carrera.numero
+    AND participacion.carrera_encuentro_numero = carrera.encuentro_numero    
+    AND premio.carrera_numero = carrera.numero
+    AND premio.carrera_encuentro_numero = carrera.encuentro_numero
+    AND premio.posicion = participacion.posicion
+    AND stud.nombre = participacion.stud_nombre
+    AND equino.nombre = participacion.equino_nombre
+GROUP BY stud.nombre, equino.nombre;
+
+
+-- VIEW gastos_por_equino
+CREATE view gastos_por_equino as
+SELECT
+    stud.nombre stud,
+    movimiento.equino_nombre equino,
+    SUM(movimiento.monto * -1) monto
+FROM
+    movimiento,
+    stud
+WHERE
+    movimiento.equino_nombre IS NOT NULL AND
+    movimiento.monto < 0 AND
+    movimiento.stud_nombre = stud.nombre
+GROUP BY stud.nombre, movimiento.equino_nombre;
+
+
+-- VIEW promedio_gasto_por_premio
+CREATE view promedio_gasto_por_premio AS
+SELECT 
+	ppe.stud, 
+	(sum(gpe.monto) / sum(ppe.monto)) promedio_gasto
+FROM
+	premios_por_equino ppe,
+	gastos_por_equino gpe
+WHERE
+	ppe.stud = gpe.stud AND 
+	ppe.equino = gpe.equino
+GROUP BY ppe.stud;
+
+

@@ -591,6 +591,8 @@ Las modificaciones realizadas para la segunda entrega fueron:
 
   \item La entidad ENTRENADOR ahora tiene los atributos FechaBaja y Sueldo. 
 
+  \item La entidad PARTICIPACION ahora tiene el atributo Posición.
+
   \item Hay una nueva entidad ACCIONISTA que ES UNA persona y hereda los atributos
 	de PERSONA. Ademas tiene los atributos no comunes ContribucionFija y 
   PorcentajeParticipacion.
@@ -599,14 +601,15 @@ Las modificaciones realizadas para la segunda entrega fueron:
     de la nueva interrelación ALOJA EN. 
 
   \item Hay una nueva entidad débil MOVIMIENTO con los atributos Fecha, Monto,
-    Concepto y Número que se relacion con la entidad STUD a traves de la interrelación
-    TIENE.
+    Concepto y Número que se relaciona con la entidad STUD a traves de la interrelación
+    TIENE. Ademas, se interrelaciona con la entidad EQUINO a través de la interrelación
+    GENERADO POR, que indica que el movimiento se le imputa al EQUINO relacionado. 
 
   \item Hay una nueva entidad APUESTA que esta relacionada con las entidades Equino, 
     Carrera y Jockey. Tiene atributos Monto y Número. 
 
   \item Hay una nueva entidad PREMIO que esta relacioanda con la entidad
-    CARRERA. Tiene como atributos posicion y monto.
+    CARRERA. Tiene como atributos Posición y Monto.
 
 \end{enumerate}
 
@@ -745,6 +748,11 @@ el equino llega en primera posición en dicha carrera.
 
 Representa una relación entre un Stud y un Movimiento Contable.
 
+\subsection{Generado Por}
+
+Representa una relación entre un Equino y un Movimiento. Indica a cual equino puede
+imputarsele un determinado movimiento, ya sea gasto, o ganancia. 
+
 \subsection{Movimiento}
 
 Representa un movimiento contable de un Stud. Todos los movimientos de caja
@@ -764,6 +772,8 @@ comida, etc) son registrados en esta entidad.
 
   \item \textbf{Concepto} Indica el Concepto del Movimiento, por ejemplo 
   'cobro de premio' o 'pago a veterinario'.
+
+  \item \textbf{\dashuline{EquinoNombre}} Identificador del equino al cual se le imputa el movimiento.
       
 \end{itemize}
 
@@ -800,7 +810,7 @@ Representa el monto a ganar como premio, dada una posición, en una carrera.
   \item \emph{Jockey}(\uline{DNI}, Categoria, Peso, Talla, Nombres, Apellido)
 
   \item \emph{Movimiento}(\uline{\dashuline{StudNombre}}, \uline{Numero},
-    Fecha, Monto, Concepto)
+    Fecha, Monto, Concepto, \dashuline{EquinoNombre})
 
   \item \emph{Apuesta}(\uline{\dashuline{JockeyDNI}},
     \uline{\dashuline{EquinoNombre}}, \uline{\dashuline{CarreraNumero}},
@@ -884,39 +894,17 @@ comisión de apuestas.
 Se pide el Stud que gasto más recursos para obtener cada premio.
 
 \begin{lstlisting}
-  SELECT
-    stud_nombre
+  SELECT 
+    stud 
   FROM
-    (
-    SELECT
-      stud_nombre,
-      (premios / gastos) promedio,
-      max(premios/gastos) max_promedio
-    FROM
-      (
-      SELECT
-        movimiento.stud_nombre,
-        count(*) as premios,
-        SUM(monto) gastos
-      FROM
-        movimiento 
-      INNER JOIN participacion p
-      ON movimiento.stud_nombre = "a"
-      WHERE
-        NOT EXISTS
-          (
-          SELECT *
-          FROM participacion p2
-          WHERE p2.tiempo < p.tiempo
-            AND p2.carrera_numero = p.carrera_numero
-            AND p2.carrera_encuentro_numero = p.carrera_encuentro_numero
-            AND p2.descalificado = 0
-          )
-        AND movimiento.monto < 0
-        GROUP BY movimiento.stud_nombre
-      ) premios_gastos
-    GROUP BY stud_nombre, (premios / gastos)) premios_promedios
-    WHERE promedio = max_promedio
+    promedio_gasto_por_premio pgpp
+  WHERE 
+    NOT EXISTS(SELECT * 
+               FROM 
+                 promedio_gasto_por_premio pgpp2
+               WHERE 
+                 pgpp2.promedio_gasto > pgpp.promedio_gasto AND 
+                 pgpp2.stud = pgpp.stud)
 \end{lstlisting}
 
 \subsection{Consulta 3}
@@ -925,43 +913,20 @@ Se pide encontrar los caballos que mejores resultados económicos generaron para
 sus Studs.
 
 \begin{lstlisting}
-  SELECT *
+ 
+  SELECT 
+    stud, 
+    equino 
   FROM
-    (
-    SELECT
-      equino_nombre,
-      stud_nombre,
-      count(*) as ganadas 
-    FROM
-      participacion p
-    WHERE
-      NOT EXISTS
-        (
-        SELECT *
-        FROM participacion p2
-        WHERE p2.tiempo < p.tiempo
-        AND p2.carrera_numero = p.carrera_numero
-        AND p2.carrera_encuentro_numero = p.carrera_encuentro_numero
-        AND p2.descalificado = 0
-        )
-    GROUP BY
-      equino_nombre,
-      stud_nombre
-    ) carr_ganadas,
-    (
-    SELECT
-      equino_nombre,
-      stud_nombre,
-      count(*) participadas
-    FROM
-      participacion p
-    GROUP BY
-      equino_nombre,
-      stud_nombre
-    ) carr_participadas
+    balance_por_stud_equino bpse
   WHERE
-    carr_participadas.equino_nombre = carr_ganadas.equino_nombre
-    AND carr_participadas.stud_nombre = carr_ganadas.stud_nombre
+    NOT EXISTS (SELECT * 
+                FROM 
+                  balance_por_stud_equino bpse2
+                WHERE 
+                  bpse.resultado < bpse2.resultado AND 
+                  bpse.stud = bpse2.stud)
+
 \end{lstlisting}
 
 \part{Apéndice}
