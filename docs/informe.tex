@@ -880,6 +880,7 @@ comisión de apuestas.
     AND jockey.dni = participacion.jockey_dni
     AND premio.carrera_numero = carrera.numero
     AND premio.carrera_encuentro_numero = carrera.encuentro_numero
+    AND participacion.posicion = premio.posicion
     AND stud.nombre = participacion.stud_nombre
     AND contratacion.jockey_dni = jockey.dni
     AND contratacion.stud_nombre = stud.nombre
